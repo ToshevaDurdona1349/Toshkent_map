@@ -44,16 +44,16 @@ class LocationService implements AppLocation {
 
   Future<void> getDistance() async {
     final apiKey = 'Aa7274830.123456789-0123456789_0';
-    final origin = 'Nurhayot';
-    final destination = 'Los Angeles, CA';
-    final mode = 'driving';
+    // final origin = 'Nurhayot';
+    // final destination = 'Los Angeles, CA';
+    // final mode = 'driving';
     final message = 5731.892253110097;
     final status =200;// or 'walking', 'bicycling', etc.
 
     final url = 'https://api.example.com/distance?'
-        'origin=$origin&'
-        'destination=$destination&'
-        'mode=$mode&'
+        // 'origin=$origin&'
+        // 'destination=$destination&'
+        // 'mode=$mode&'
         'message=$message&'
         'status=$status&'
         'key=$apiKey';

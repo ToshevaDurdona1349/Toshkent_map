@@ -1,4 +1,4 @@
-
+import 'dart:math';
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:yandex_mapkit/yandex_mapkit.dart';
@@ -20,6 +20,7 @@ class _MapPageState extends State<MapPage> {
   void initState() {
     super.initState();
     _initPermission().ignore();
+
     // Token Api -> save access va refresh token
     // get access -> distance Api
 
@@ -75,6 +76,7 @@ class _MapPageState extends State<MapPage> {
       await LocationService().requestPermission();
     }
     await _fetchCurrentLocation();
+
   }
   /// Foydalanuvchining joriy geolokatsiyasini olish
   Future<void> _fetchCurrentLocation() async {
@@ -119,6 +121,23 @@ class _MapPageState extends State<MapPage> {
     // setState(() {});
     // print(addressDetail);
   }
+  ///ikki nuqta orasidagi masofani hisoblash
+  double calculateDistance(double lat1, double lon1, double lat2, double lon2) {
+    const R = 6371; // Radius of the earth in km
+    final dLat = _degreesToRadians(lat2 - lat1);
+    final dLon = _degreesToRadians(lon2 - lon1);
+    final a = sin(dLat / 2) * sin(dLat / 2) +
+        cos(_degreesToRadians(lat1)) * cos(_degreesToRadians(lat2)) *
+            sin(dLon / 2) * sin(dLon / 2);
+    final c = 2 * atan2(sqrt(a), sqrt(1 - a));
+    final distance = R * c; // Distance in km
+    return distance;
+  }
+
+  double _degreesToRadians(degrees) {
+    return degrees * pi / 180;
+  }
+
 }
 
 
